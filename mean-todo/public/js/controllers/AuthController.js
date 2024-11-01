@@ -1,4 +1,3 @@
-// public/js/controllers/AuthController.js
 
 app.controller('AuthController', ['$scope', '$location', 'AuthService', function($scope, $location, AuthService) {
     $scope.user = {};

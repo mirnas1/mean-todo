@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const config = require('../config/database');
 
-// Define the User Schema
 const UserSchema = new mongoose.Schema({
     name: {
         type: String
@@ -10,12 +9,12 @@ const UserSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true // Ensure emails are unique
+        unique: true 
     },
     username: {
         type: String,
         required: true,
-        unique: true // Ensure usernames are unique
+        unique: true 
     },
     password: {
         type: String,
@@ -23,12 +22,12 @@ const UserSchema = new mongoose.Schema({
     }
 });
 
-// Static Methods
+
 
 /**
- * Get User by ID
- * @param {String} id - User ID
- * @returns {Promise<Object>} - Returns the user object if found
+ * get user by id
+ * @param {String} id - id
+ * @returns {Promise<Object>} 
  */
 UserSchema.statics.getUserById = async function(id) {
     try {
@@ -39,9 +38,9 @@ UserSchema.statics.getUserById = async function(id) {
 };
 
 /**
- * Get User by Username
- * @param {String} username - Username
- * @returns {Promise<Object>} - Returns the user object if found
+ * get user by username
+ * @param {String} username - username
+ * @returns {Promise<Object>} - 
  */
 UserSchema.statics.getUserByUsername = async function(username) {
     try {
@@ -52,9 +51,9 @@ UserSchema.statics.getUserByUsername = async function(username) {
 };
 
 /**
- * Add a New User
- * @param {Object} newUser - New user object
- * @returns {Promise<Object>} - Returns the saved user object
+ * add a new user
+ * @param {Object} newUser - new user
+ * @returns {Promise<Object>} - 
  */
 UserSchema.statics.addUser = async function(newUser) {
     try {
@@ -68,10 +67,10 @@ UserSchema.statics.addUser = async function(newUser) {
 };
 
 /**
- * Compare Passwords
- * @param {String} candidatePassword - Password entered by the user
- * @param {String} hashedPassword - Hashed password stored in the database
- * @returns {Promise<Boolean>} - Returns true if passwords match, else false
+ * comparing passwords
+ * @param {String} candidatePassword - password entered by the user
+ * @param {String} hashedPassword - hashed password stored in the database
+ * @returns {Promise<Boolean>} 
  */
 UserSchema.statics.comparePassword = async function(candidatePassword, hashedPassword) {
     try {
@@ -82,6 +81,5 @@ UserSchema.statics.comparePassword = async function(candidatePassword, hashedPas
     }
 };
 
-// Create and Export the User Model
 const User = mongoose.model('User', UserSchema);
 module.exports = User;

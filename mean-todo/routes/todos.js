@@ -1,16 +1,11 @@
-// routes/todos.js
-
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const Todo = require('../models/todo');
 
-// Middleware to check authentication
 const requireAuth = passport.authenticate('jwt', { session: false });
 
-// =======================
-// Batch Update Todos Order
-// =======================
+
 router.put('/order', requireAuth, async (req, res) => {
     const { todos } = req.body;
 
@@ -35,9 +30,6 @@ router.put('/order', requireAuth, async (req, res) => {
     }
 });
 
-// =======================
-// Get All Todos
-// =======================
 router.get('/', requireAuth, async (req, res) => {
     try {
         const todos = await Todo.find({ userId: req.user._id }).sort({ order: 1 });
@@ -48,13 +40,11 @@ router.get('/', requireAuth, async (req, res) => {
     }
 });
 
-// =======================
-// Add a New Todo
-// =======================
+
 router.post('/', requireAuth, async (req, res) => {
     const { todo, priority, order } = req.body;
 
-    // Basic validation
+
     if (!todo) {
         return res.status(400).json({ success: false, msg: 'Todo text is required' });
     }
@@ -75,9 +65,7 @@ router.post('/', requireAuth, async (req, res) => {
     }
 });
 
-// =======================
-// Update a Todo
-// =======================
+
 router.put('/:id', requireAuth, async (req, res) => {
     const { todo, is_completed, priority, order } = req.body;
 
@@ -99,9 +87,7 @@ router.put('/:id', requireAuth, async (req, res) => {
     }
 });
 
-// =======================
-// Delete a Todo
-// =======================
+
 router.delete('/:id', requireAuth, async (req, res) => {
     try {
         const deletedTodo = await Todo.findOneAndDelete({ _id: req.params.id, userId: req.user._id });

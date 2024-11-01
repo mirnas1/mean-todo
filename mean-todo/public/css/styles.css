@@ -15,7 +15,6 @@ body {
 }
 
 .input-container {
-    /* Removed display properties since AngularJS handles visibility */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -86,7 +85,7 @@ body {
         inset 3px 3px 5px rgba(0, 0, 0, 0.15),
         5px 5px 15px rgba(0, 0, 0, 0.2);
     border: 1px solid #b3b3b3;
-    position: relative; /* To position options-menu */
+    position: relative;
 }
 
 h1 {
@@ -147,7 +146,7 @@ h1 {
         inset 2px 2px 4px rgba(0, 0, 0, 0.15);
     cursor: grab;
     transition: background-color 0.2s, box-shadow 0.2s;
-    position: relative; /* To position options-menu */
+    position: relative; 
 }
 
 .todo-item:hover {
@@ -234,7 +233,7 @@ h1 {
 
 .options-menu {
     position: absolute;
-    top: 35px; /* Adjust based on button height */
+    top: 35px; 
     right: 0;
     background-color: #ffffff;
     border: 1px solid #ddd;
@@ -274,8 +273,8 @@ h1 {
     font-size: 27px;
     line-height: 1;
     padding: 0 5px;
-    position: relative; /* To position the dropdown */
-    z-index: 1; /* Ensure it sits above the todo-item */
+    position: relative; 
+    z-index: 1;
 }
 
 

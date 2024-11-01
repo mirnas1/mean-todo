@@ -16,7 +16,6 @@
             <span class="priority-indicator" ng-style="{ 'background-color': todo.priority }"></span>
             <button class="options-button" ng-click="toggleOptions(todo)" ng-mousedown="$event.stopPropagation()">&#x22EE;</button>
             
-            <!-- Options Menu -->
             <div class="options-menu" ng-show="todo.showOptions">
                 <button ng-click="editTodo(todo); $event.stopPropagation()">Edit</button>
                 <button class="priority-btn white" ng-click="setPriority(todo, 'white')">Set White</button>

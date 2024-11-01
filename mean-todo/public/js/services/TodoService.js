@@ -1,5 +1,3 @@
-// public/js/services/TodoService.js
-
 app.factory('TodoService', ['$http', 'AuthService', function($http, AuthService) {
     var service = {};
 
@@ -27,7 +25,6 @@ app.factory('TodoService', ['$http', 'AuthService', function($http, AuthService)
         });
     };
 
-    // Batch update function
     service.updateTodosOrder = function(todos) {
         return $http.put('/todos/order', { todos: todos }, {
             headers: { 'Authorization': AuthService.getToken() }
