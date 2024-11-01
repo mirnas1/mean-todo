@@ -1,5 +1,3 @@
-// public/js/services/AuthService.js
-
 app.factory('AuthService', ['$http', '$window', function($http, $window) {
     var auth = {};
 
