@@ -7,56 +7,56 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const config = require('./config/database');
 
-mongoose.Promise = global.Promise; //this was added based off a comment on the video
-mongoose.connect(config.database);
-
-mongoose.connection.on('connected', () => {
-
-    console.log('conntected to database' + config.database);
+mongoose.Promise = global.Promise;
+mongoose.connect(config.database, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 })
-
-mongoose.connection.on('error', (err) => {
-
-    console.log('databse error' + err);
-})
+.then(() => console.log('Connected to database ' + config.database))
+.catch(err => console.log('Database connection error: ' + err));
 
 const app = express();
-//cors middleware
-app.use(cors());
 
+// CORS Middleware
+app.use(cors({
+    origin: 'http://localhost:3000', // Adjust if your frontend is hosted elsewhere
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+// Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
-//body parser middleware
+
+// Body Parser Middleware
 app.use(bodyParser.json());
- 
-const users = require('./routes/users');
 
-//port num
-const port = 3000
-
+// Express Session Middleware (optional, since using JWT)
 app.use(session({
     secret: config.secret,
     resave: false,
     saveUninitialized: true
 }));
 
-//passport middleware
+// Passport Middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
 require('./config/passport')(passport);
 
+// Routes
+const users = require('./routes/users');
+const todos = require('./routes/todos');
 
 app.use('/users', users);
+app.use('/todos', todos);
 
-
-
-//index route
+// Index Route
 app.get('/', (req, res) => {
-    res.send('invalid endpoint');
-})
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
-//start server
+// Start Server
+const port = 3000;
 app.listen(port, () => {
     console.log('Server started on port ' + port);
-
-})
+});
